@@ -1,0 +1,4 @@
+requests
+beautifulsoup4
+langdetect
+youtube_transcript_api
