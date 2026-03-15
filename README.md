@@ -91,6 +91,44 @@ Each content source is assigned a baseline reliability score based on its credib
 
 This simple scoring framework demonstrates how **source reliability can be incorporated into AI knowledge pipelines**.
 
+Design Decisions
+Multi-source ingestion
+
+The pipeline ingests data from multiple content types including blogs, YouTube videos, and PubMed research articles. This reflects how real AI knowledge systems aggregate information from heterogeneous sources.
+
+Content chunking
+
+Long articles and transcripts are split into smaller content chunks. This prepares the dataset for downstream AI applications such as semantic search, embedding models, or retrieval-augmented generation (RAG).
+
+Trust scoring mechanism
+
+Not all information sources have the same reliability.
+The trust score is computed using multiple signals:
+
+Source credibility (e.g., PubMed vs blogs vs YouTube)
+
+Author presence
+
+Content richness
+
+Citation indicators
+
+This scoring approach helps prioritize scientifically reliable content over general web information.
+
+Structured dataset design
+
+The final dataset is normalized into a consistent schema containing:
+
+metadata
+
+topic tags
+
+trust score
+
+content chunks
+
+This structure allows the dataset to be easily used by AI retrieval pipelines or health assistants.
+
 ## Output
 
 The final structured dataset is stored in:
