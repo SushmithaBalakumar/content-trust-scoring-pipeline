@@ -24,9 +24,8 @@ def scrape_pubmed(pmid):
 
     # topic tagging
     topics = extract_topics(abstract_text)
+    trust_score = calculate_trust_score("pubmed", "Unknown", content_chunks)
 
-    # trust score
-    trust_score = calculate_trust_score("pubmed", "Unknown", "Unknown")
 
     return {
         "source_url": f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/",
