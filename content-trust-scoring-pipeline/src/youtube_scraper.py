@@ -18,7 +18,7 @@ def scrape_youtube(video_id):
     topics = extract_topics(full_text)
 
     # Trust scoring
-    trust_score = calculate_trust_score("youtube", "Unknown", "Unknown")
+    trust_score = calculate_trust_score("youtube", "Unknown", content_chunks)
 
     return {
         "source_url": f"https://www.youtube.com/watch?v={video_id}",
