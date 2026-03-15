@@ -28,8 +28,6 @@ def scrape_blog(url):
     # Extract paragraphs
     paragraphs = soup.find_all("p")
     content = " ".join([p.get_text() for p in paragraphs])
-    # Calculate trust score
-    trust_score = calculate_trust_score("blog", author, published_date)
     topics = extract_topics(content)
 
     # Language detection
@@ -45,6 +43,7 @@ def scrape_blog(url):
         if len(p.get_text().strip()) > 80
         and "Bezzy" not in p.get_text()
     ]
+    trust_score = calculate_trust_score("blog", author, content_chunks)
 
 
 
