@@ -35,40 +35,7 @@ content-trust-scoring-pipeline
 │
 ├── requirements.txt
 └── README.md
-```
----
-# System Architecture
-            Internet Sources
-         (Blogs / YouTube / PubMed)
-                    │
-                    ▼
-            Content Scrapers
-   ┌─────────────┬─────────────┬─────────────┐
-   │             │             │
-Blog Scraper   YouTube Scraper  PubMed Scraper
-   │             │             │
-   └─────────────┴─────────────┴─────────────┘
-                    │
-                    ▼
-             Content Processing
-        (Cleaning + Chunking + Metadata)
-                    │
-                    ▼
-               Topic Tagging
-                    │
-                    ▼
-              Trust Scoring Model
-                    │
-                    ▼
-              Ranked Dataset
-                dataset.json
-                    │
-                    ▼
-           Knowledge Retrieval Layer
-                (query.py)
-                    │
-                    ▼
-         Trusted Content for AI Systems
+```    
 ---
 
 # Module Description
