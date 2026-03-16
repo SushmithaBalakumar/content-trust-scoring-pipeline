@@ -4,11 +4,20 @@
 
 This project implements a **multi-source content ingestion and reliability scoring pipeline** designed for AI-driven applications that require trustworthy knowledge sources.
 
-The system collects content from multiple domains and transforms it into a **structured dataset enriched with metadata, topic tags, and reliability scores**.
+The system collects information from heterogeneous sources and converts it into a **structured dataset enriched with metadata, topic tags, content chunks, and reliability scores**.
 
-The goal is to demonstrate how heterogeneous data sources can be normalized and evaluated for **AI knowledge pipelines such as retrieval systems, health assistants, or recommendation systems**.
+The goal of this project is to demonstrate how different types of knowledge sources can be **normalized, analyzed, and ranked based on credibility** before being used in AI systems such as:
 
-## Project Structure
+* Retrieval-Augmented Generation (RAG)
+* AI knowledge assistants
+* Health information systems
+* Content recommendation engines
+
+By combining multiple sources and assigning reliability scores, the pipeline helps downstream AI models **prioritize high-quality information**.
+
+---
+
+# Project Structure
 
 ```
 content-trust-scoring-pipeline
@@ -28,103 +37,198 @@ content-trust-scoring-pipeline
 └── README.md
 ```
 
-### Description
+---
 
-* **blog_scraper.py** – Extracts content and metadata from blog articles
-* **youtube_scraper.py** – Retrieves YouTube transcripts and processes text
-* **pubmed_scraper.py** – Collects biomedical abstracts from PubMed
-* **tagging.py** – Generates topic tags using keyword frequency
-* **scoring.py** – Computes source reliability scores
-* **pipeline.py** – Orchestrates the full ingestion and dataset generation process
+# Module Description
 
-## Data Sources
+### blog_scraper.py
 
-The pipeline ingests information from three different content types:
+Scrapes blog articles and extracts:
 
-* **Blogs** – Health and nutrition articles
-* **YouTube** – Educational videos with transcripts
-* **PubMed** – Peer-reviewed biomedical research articles
+* Title
+* Author
+* Publication date
+* Article content
 
-For this assignment the dataset includes:
+The content is cleaned and split into **content chunks** suitable for AI processing.
 
-* 3 Blog Articles
-* 2 YouTube Videos
-* 2 PubMed Research Papers
+---
 
-## Pipeline Architecture
+### youtube_scraper.py
 
-The system follows a modular ingestion workflow:
+Fetches transcripts from YouTube videos using the YouTube Transcript API.
 
-### 1. Content Scraping
+The transcript is converted into structured text chunks that can be used in AI pipelines.
 
-Collect text content from blog pages, YouTube transcripts, and PubMed abstracts.
+---
 
-### 2. Metadata Extraction
+### pubmed_scraper.py
 
-Extract source information such as title, author, publication date, and language.
+Retrieves biomedical research abstracts from **PubMed** using the NCBI API.
 
-### 3. Content Processing
+Scientific articles are included to introduce **high-credibility sources** into the dataset.
 
-Clean and segment text into smaller **content chunks** suitable for downstream AI processing.
+---
 
-### 4. Topic Tagging
+### tagging.py
 
-Extract frequently occurring keywords to identify dominant topics within the content.
+Performs simple NLP-based topic extraction.
 
-### 5. Trust Scoring
+It identifies the **most frequent meaningful words** in the text and assigns them as topic tags.
 
-Assign a reliability score based on the **type of source** and available metadata.
+Example:
 
-### 6. Dataset Generation
+```
+["microbiome", "health", "bacteria", "microbes", "brain"]
+```
 
-Consolidate all processed entries into a unified JSON dataset.
+These tags help enable **semantic search and filtering** in downstream AI systems.
 
-## Trust Scoring Logic
+---
 
-Each content source is assigned a baseline reliability score based on its credibility.
+### scoring.py
 
-| Source Type | Trust Score | Reason                             |
-| ----------- | ----------- | ---------------------------------- |
-| PubMed      | 0.5         | Peer-reviewed scientific research  |
-| Blog        | 0.3         | Informational but not academic     |
-| YouTube     | 0.2         | User-generated educational content |
+Computes a **trust score** for each source based on multiple credibility signals.
 
-This simple scoring framework demonstrates how **source reliability can be incorporated into AI knowledge pipelines**.
+---
 
-## Design Decisions
+### pipeline.py
 
-### Multi-source ingestion
+The main orchestrator of the system.
 
-The pipeline ingests data from multiple content types including blogs, YouTube videos, and PubMed research articles. This reflects how real AI knowledge systems aggregate information from heterogeneous sources.
+It performs:
 
-### Content chunking
+1. Source ingestion
+2. Metadata extraction
+3. Topic tagging
+4. Trust score computation
+5. Dataset generation
 
-Long articles and transcripts are split into smaller content chunks. This prepares the dataset for downstream AI applications such as semantic search, embedding models, or retrieval-augmented generation (RAG).
+The final dataset is **sorted by trust_score so that higher reliability sources appear first**.
 
-### Trust scoring mechanism
+---
 
-Not all information sources have the same reliability.
-The trust score is computed using multiple signals:
+# Data Sources
 
-### Source credibility (e.g., PubMed vs blogs vs YouTube)
-*Author presence
-*Content richness
-*Citation indicators
+The pipeline ingests information from three different content types.
 
-This scoring approach helps prioritize scientifically reliable content over general web information.
+### Blogs
 
-## Structured dataset design
+Health and nutrition articles from credible websites.
 
-The final dataset is normalized into a consistent schema containing:
+### YouTube
 
-*metadata
-*topic tags
-*trust score
-*content chunks
+Educational videos with transcripts explaining scientific concepts.
 
-This structure allows the dataset to be easily used by AI retrieval pipelines or health assistants.
+### PubMed
 
-## Output
+Peer-reviewed biomedical research papers.
+
+---
+
+### Dataset Composition
+
+For this assignment the dataset contains:
+
+* **3 Blog Articles**
+* **2 YouTube Videos**
+* **2 PubMed Research Papers**
+
+---
+
+# Pipeline Architecture
+
+The pipeline follows a modular ingestion workflow.
+
+### 1 Content Scraping
+
+Content is collected from blog pages, YouTube transcripts, and PubMed abstracts.
+
+---
+
+### 2 Metadata Extraction
+
+Key metadata fields are extracted:
+
+* Title
+* Author
+* Publication date
+* Language
+* Region
+
+---
+
+### 3 Content Processing
+
+The text is cleaned and segmented into **content chunks**.
+
+Chunking helps prepare the data for **LLM-based retrieval systems**.
+
+---
+
+### 4 Topic Tagging
+
+Frequent keywords are extracted to generate topic tags.
+
+These tags allow the system to categorize and search information more effectively.
+
+---
+
+### 5 Trust Scoring
+
+Each source is assigned a **trust score** using multiple credibility signals.
+
+The score is computed using:
+
+```
+trust_score =
+source_weight +
+author_presence +
+content_length +
+citation_presence
+```
+
+### Source Weight
+
+| Source Type | Base Score |
+| ----------- | ---------- |
+| PubMed      | 0.50       |
+| Blog        | 0.25       |
+| YouTube     | 0.20       |
+
+### Additional Signals
+
+| Signal            | Description                                                    |
+| ----------------- | -------------------------------------------------------------- |
+| Author Presence   | Sources with identified authors receive additional credibility |
+| Content Length    | Longer informative content increases reliability               |
+| Citation Keywords | Research-related keywords increase credibility                 |
+
+The final trust score ranges between **0 and 1**.
+
+---
+
+# Dataset Ranking
+
+After computing trust scores, the dataset is **sorted by reliability**.
+
+Example ranking:
+
+```
+1. PubMed Research Paper     — 0.85
+2. PubMed Research Paper     — 0.85
+3. Blog Article              — 0.70
+4. Blog Article              — 0.70
+5. Blog Article              — 0.60
+6. YouTube Educational Video — 0.50
+7. YouTube Educational Video — 0.50
+```
+
+This ranking helps AI systems **prioritize trustworthy sources during retrieval**.
+
+---
+
+# Output
 
 The final structured dataset is stored in:
 
@@ -132,22 +236,31 @@ The final structured dataset is stored in:
 data/dataset.json
 ```
 
-Each record contains:
+Each record contains the following fields:
 
-* source_url
-* source_type
-* title
-* author
-* published_date
-* language
-* region
-* topic_tags
-* trust_score
-* content_chunks
+```
+source_url
+source_type
+title
+author
+published_date
+language
+region
+topic_tags
+trust_score
+content_chunks
+```
 
-This structure enables easy integration with **search systems, recommendation engines, or Retrieval-Augmented Generation (RAG) pipelines**.
+This structure allows easy integration with:
 
-## How to Run
+* AI search systems
+* recommendation engines
+* knowledge graphs
+* Retrieval-Augmented Generation (RAG) pipelines
+
+---
+
+# How to Run
 
 Install dependencies:
 
@@ -161,8 +274,26 @@ Run the ingestion pipeline:
 python src/pipeline.py
 ```
 
-The pipeline will scrape all sources, process the content, and generate the final dataset automatically.
+The pipeline will:
 
-## Notes
+1. Scrape all configured sources
+2. Extract metadata
+3. Generate topic tags
+4. Compute trust scores
+5. Rank sources by reliability
+6. Produce the final dataset
 
-This pipeline design mirrors real-world **AI ingestion systems**, where heterogeneous knowledge sources are normalized, enriched with metadata, and scored for reliability before being used in downstream retrieval or decision-support models.
+---
+
+# Notes
+
+This project demonstrates how real-world AI systems prepare knowledge before using it in machine learning models.
+
+In production AI pipelines, raw web data must first be:
+
+* normalized
+* enriched with metadata
+* ranked for reliability
+* structured for retrieval
+
+This pipeline simulates the **knowledge ingestion layer of an AI system**, where heterogeneous sources are transformed into structured, ranked datasets suitable for downstream AI applications.
