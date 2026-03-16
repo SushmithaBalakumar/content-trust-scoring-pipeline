@@ -1,21 +1,46 @@
-def calculate_trust_score(source_type, author, published_date):
+def calculate_trust_score(source_type, author, content_chunks, published_date="Unknown"):
 
-    score = 0
+    # ---------- Source credibility ----------
+    SOURCE_WEIGHTS = {
+        "blog": 0.25,
+        "youtube": 0.20,
+        "pubmed": 0.50
+    }
 
-    # Source reliability
-    if source_type == "pubmed":
-        score += 0.5
-    elif source_type == "blog":
-        score += 0.3
-    elif source_type == "youtube":
-        score += 0.2
+    source_weight = SOURCE_WEIGHTS.get(source_type, 0.20)
 
-    # Author presence
-    if author != "Unknown":
-        score += 0.2
+    # ---------- Author credibility ----------
+    author_score = 0.15 if author != "Unknown" else 0
 
-    # Recency (simplified rule)
-    if published_date != "Unknown":
-        score += 0.1
+    # ---------- Content depth ----------
+    # More content generally indicates richer information
+    content_length_score = min(len(content_chunks) / 20, 0.15)
 
-    return round(score, 2)
+    # ---------- Citation / research indicators ----------
+    content_text = " ".join(content_chunks).lower()
+
+    citation_keywords = [
+        "study",
+        "research",
+        "journal",
+        "clinical",
+        "trial",
+        "evidence"
+    ]
+
+    citation_score = 0.10 if any(k in content_text for k in citation_keywords) else 0
+
+    # ---------- Recency factor ----------
+    # If a publish date exists, give a small boost
+    recency_score = 0.05 if published_date != "Unknown" else 0
+
+    # ---------- Final trust score ----------
+    trust_score = (
+        source_weight
+        + author_score
+        + content_length_score
+        + citation_score
+        + recency_score
+    )
+
+    return round(min(trust_score, 1.0), 2)
