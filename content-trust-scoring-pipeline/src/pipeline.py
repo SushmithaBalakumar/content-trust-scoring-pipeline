@@ -57,13 +57,17 @@ for pmid in pubmed_ids:
         print(f"Failed PubMed scrape: {pmid} | {e}")
 
 
-# ---------- Save Dataset ----------
+# ---------- Sort Dataset by Trust Score ----------
+dataset_sorted = sorted(dataset, key=lambda x: x["trust_score"], reverse=True)
 
+
+# ---------- Save Dataset ----------
 os.makedirs("data", exist_ok=True)
 
 with open("data/dataset.json", "w", encoding="utf-8") as f:
-    json.dump(dataset, f, indent=4, ensure_ascii=False)
+    json.dump(dataset_sorted, f, indent=4, ensure_ascii=False)
 
 
 print("Dataset generated successfully.")
-print(f"Total records collected: {len(dataset)}")
+print(f"Total records collected: {len(dataset_sorted)}")
+print("Dataset sorted by trust_score (highest reliability first).")
