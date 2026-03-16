@@ -291,10 +291,31 @@ Example:
 ```
 python src/query.py microbiome
 ```
+Output:     
+Top trusted sources for topic: gut
 
+1. PUBMED (0.85)
+Human gut microbiota/microbiome in health and diseases: a review.
+https://pubmed.ncbi.nlm.nih.gov/33136284/
+
+2. PUBMED (0.85)
+Gut microbiome and health: mechanistic insights.
+https://pubmed.ncbi.nlm.nih.gov/35105664/
+
+3. BLOG (0.7)
+How Does Your Gut Microbiome Affect Your Health?
+https://www.healthline.com/nutrition/gut-microbiome-and-health
+
+4. BLOG (0.7)
+5 Health Benefits of Probiotics
+https://www.healthline.com/nutrition/8-health-benefits-of-probiotics
+
+5. YOUTUBE (0.5)
+Gut Microbiome Explained in Simple Words       
+https://www.youtube.com/watch?v=JaXMGFShqDE 
 The system searches the dataset and returns the most relevant sources ranked by trust_score.
 This demonstrates how the dataset could be used in Retrieval-Augmented Generation (RAG) pipelines where AI systems prioritize high-credibility information.
-
+---
 # Notes
 
 This project demonstrates how real-world AI systems prepare knowledge before using it in machine learning models.
