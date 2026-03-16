@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 from langdetect import detect
+import json
+
 from scoring import calculate_trust_score
 from tagging import extract_topics
 
@@ -8,56 +10,109 @@ from tagging import extract_topics
 def scrape_blog(url):
 
     headers = {
-    "User-Agent": "Mozilla/5.0"
+        "User-Agent": "Mozilla/5.0"
     }
 
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.text, "html.parser")
 
-    # Title
-    title = soup.find("title").text if soup.find("title") else ""
+    # ---------- Title ----------
+    title_tag = soup.find("meta", property="og:title")
+    if title_tag:
+        title = title_tag.get("content", "Unknown")
+    else:
+        title = soup.find("title").text if soup.find("title") else "Unknown"
 
-    # Author
+    # ---------- Author ----------
+    author = "Unknown"
+
     author_tag = soup.find("meta", {"name": "author"})
-    author = author_tag["content"] if author_tag else "Unknown"
+    if author_tag:
+        author = author_tag.get("content", "Unknown")
 
-    # Published date
+    # ---------- Published Date ----------
+    published_date = "Unknown"
+
     date_tag = soup.find("meta", {"property": "article:published_time"})
-    published_date = date_tag["content"] if date_tag else "Unknown"
+    if date_tag:
+        published_date = date_tag.get("content", "Unknown")
 
-    # Extract paragraphs
+    # ---------- JSON-LD Fallback (Healthline fix) ----------
+    if author == "Unknown" or published_date == "Unknown":
+
+        json_scripts = soup.find_all("script", type="application/ld+json")
+
+        for script in json_scripts:
+            try:
+                data = json.loads(script.string)
+
+                if isinstance(data, list):
+                    data = data[0]
+
+                # Extract author
+                if author == "Unknown" and "author" in data:
+                    if isinstance(data["author"], dict):
+                        author = data["author"].get("name", "Unknown")
+
+                    elif isinstance(data["author"], list):
+                        author = data["author"][0].get("name", "Unknown")
+
+                # Extract published date
+                if published_date == "Unknown" and "datePublished" in data:
+                    published_date = data.get("datePublished", "Unknown")
+
+            except:
+                continue
+
+    # ---------- Extract Paragraphs ----------
     paragraphs = soup.find_all("p")
-    content = " ".join([p.get_text() for p in paragraphs])
-    topics = extract_topics(content)
 
-    # Language detection
+    cleaned_paragraphs = []
+
+    for p in paragraphs:
+
+        text = p.get_text().strip()
+
+        if (
+            len(text) > 80
+            and "Bezzy" not in text
+            and "advertisement" not in text.lower()
+        ):
+            cleaned_paragraphs.append(text)
+
+    content = " ".join(cleaned_paragraphs)
+
+    # ---------- Language Detection ----------
     try:
         language = detect(content)
     except:
         language = "unknown"
 
-    # Chunk content
-    content_chunks = [
-        p.get_text().strip()
-        for p in paragraphs
-        if len(p.get_text().strip()) > 80
-        and "Bezzy" not in p.get_text()
-    ]
-    trust_score = calculate_trust_score("blog", author, content_chunks)
+    # ---------- Topic Extraction ----------
+    topics = extract_topics(content)
 
+    # ---------- Content Chunks ----------
+    content_chunks = cleaned_paragraphs[:10]
 
+    # ---------- Trust Score ----------
+    trust_score = calculate_trust_score(
+        "blog",
+        author,
+        content_chunks,
+        published_date
+    )
 
     return {
         "source_url": url,
         "source_type": "blog",
         "title": title,
+        "author": author,
         "published_date": published_date,
         "language": language,
         "region": "unknown",
         "topic_tags": topics,
-        "author": author,
         "trust_score": trust_score,
-        "content_chunks": content_chunks[:10]
+        "content_chunks": content_chunks
     }
 
 
