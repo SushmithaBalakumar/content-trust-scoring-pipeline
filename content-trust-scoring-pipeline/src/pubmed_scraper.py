@@ -13,26 +13,51 @@ def scrape_pubmed(pmid):
 
     root = ET.fromstring(response.content)
 
+    # ---------- Title ----------
     title = root.find(".//ArticleTitle")
-    abstract = root.find(".//AbstractText")
-
     title_text = title.text if title is not None else "Unknown"
+
+    # ---------- Abstract ----------
+    abstract = root.find(".//AbstractText")
     abstract_text = abstract.text if abstract is not None else "No abstract available"
 
-    # split abstract into chunks
-    content_chunks = abstract_text.split(". ")
+    # ---------- Authors ----------
+    authors = root.findall(".//Author")
+    author_names = []
 
-    # topic tagging
+    for author in authors:
+        last = author.find("LastName")
+        first = author.find("ForeName")
+
+        if last is not None and first is not None:
+            author_names.append(f"{first.text} {last.text}")
+
+    author = ", ".join(author_names[:3]) if author_names else "Unknown"
+
+    # ---------- Journal ----------
+    journal = root.find(".//Journal/Title")
+    journal_name = journal.text if journal is not None else "Unknown"
+
+    # ---------- Publication Year ----------
+    year = root.find(".//PubDate/Year")
+    published_date = year.text if year is not None else "Unknown"
+
+    # ---------- Chunk abstract ----------
+    content_chunks = [c.strip() for c in abstract_text.split(". ") if c.strip()]
+
+    # ---------- Topic tagging ----------
     topics = extract_topics(abstract_text)
-    trust_score = calculate_trust_score("pubmed", "Unknown", content_chunks)
 
+    # ---------- Trust score ----------
+    trust_score = calculate_trust_score("pubmed", author, content_chunks, published_date)
 
     return {
         "source_url": f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/",
         "source_type": "pubmed",
         "title": title_text,
-        "author": "Unknown",
-        "published_date": "Unknown",
+        "author": author,
+        "journal": journal_name,
+        "published_date": published_date,
         "language": "en",
         "region": "global",
         "topic_tags": topics,
