@@ -1,5 +1,59 @@
 [
     {
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/33136284/",
+        "source_type": "pubmed",
+        "title": "Human gut microbiota/microbiome in health and diseases: a review.",
+        "author": "Eman Zakaria Gomaa",
+        "journal": "Antonie van Leeuwenhoek",
+        "published_date": "2020",
+        "language": "en",
+        "region": "global",
+        "topic_tags": [
+            "microbiota",
+            "human",
+            "modification",
+            "composition",
+            "nutritional"
+        ],
+        "trust_score": 0.85,
+        "content_chunks": [
+            "The human gut microbiota has received considerable interest in the recent years and our knowledge of the inhabitant species and their potential applications is increased particularly after the development of metagenomic studies",
+            "Gut microbiota is highly diverse and harboring trillions of microorganisms in human digestive system",
+            "The shaping and multiplication of gut microbiome starts at birth, while the modification of their composition depends mainly on various genetic, nutritional and environmental factors",
+            "The modification in the composition and function of the gut microbiota can change intestinal permeability, digestion and metabolism as well as immune responses",
+            "The pro inflammatory state caused by alternation of gut microbiota balance lead to the onset of many diseases ranging from gastrointestinal and metabolic conditions to immunological and neuropsychiatric diseases",
+            "In this context, the present review clarifies the role of gut microbiota in maintaining host health and investigates how nutritional and environmental factors affect the gut microbial structure and function",
+            "In addition, many therapeutic strategies of gut microbiota aimed at modulating and restoring of the intestinal ecosystem balance have been surveyed."
+        ]
+    },
+    {
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/35105664/",
+        "source_type": "pubmed",
+        "title": "Gut microbiome and health: mechanistic insights.",
+        "author": "Willem M de Vos, Herbert Tilg, Matthias Van Hul",
+        "journal": "Gut",
+        "published_date": "2022",
+        "language": "en",
+        "region": "global",
+        "topic_tags": [
+            "molecular",
+            "diseases",
+            "receptor",
+            "microbiota",
+            "health"
+        ],
+        "trust_score": 0.85,
+        "content_chunks": [
+            "The gut microbiota is now considered as one of the key elements contributing to the regulation of host health",
+            "Virtually all our body sites are colonised by microbes suggesting different types of crosstalk with our organs",
+            "Because of the development of molecular tools and techniques (ie, metagenomic, metabolomic, lipidomic, metatranscriptomic), the complex interactions occurring between the host and the different microorganisms are progressively being deciphered",
+            "Nowadays, gut microbiota deviations are linked with many diseases including obesity, type 2 diabetes, hepatic steatosis, intestinal bowel diseases (IBDs) and several types of cancer",
+            "Thus, suggesting that various pathways involved in immunity, energy, lipid and glucose metabolism are affected.In this review, specific attention is given to provide a critical evaluation of the current understanding in this field",
+            "Numerous molecular mechanisms explaining how gut bacteria might be causally linked with the protection or the onset of diseases are discussed",
+            "We examine well-established metabolites (ie, short-chain fatty acids, bile acids, trimethylamine N-oxide) and extend this to more recently identified molecular actors (ie, endocannabinoids, bioactive lipids, phenolic-derived compounds, advanced glycation end products and enterosynes) and their specific receptors such as peroxisome proliferator-activated receptor alpha (PPARα) and gamma (PPARγ), aryl hydrocarbon receptor (AhR), and G protein-coupled receptors (ie, GPR41, GPR43, GPR119, Takeda G protein-coupled receptor 5).Altogether, understanding the complexity and the molecular aspects linking gut microbes to health will help to set the basis for novel therapies that are already being developed."
+        ]
+    },
+    {
         "source_url": "https://www.healthline.com/nutrition/gut-microbiome-and-health",
         "source_type": "blog",
         "title": "How Does Your Gut Microbiome Affect Your Health?",
@@ -29,35 +83,6 @@
         ]
     },
     {
-        "source_url": "https://www.healthline.com/nutrition/11-super-healthy-probiotic-foods",
-        "source_type": "blog",
-        "title": "11 Probiotic Foods That Are Super Healthy",
-        "author": "Hrefna Palsdottir, MS",
-        "published_date": "2018-08-28T07:00:00Z",
-        "language": "en",
-        "region": "unknown",
-        "topic_tags": [
-            "fermented",
-            "bacteria",
-            "probiotics",
-            "health",
-            "probiotic"
-        ],
-        "trust_score": 0.6,
-        "content_chunks": [
-            "Adding probiotics to your diet may offer many health benefits. Yogurt is one of the best sources of probiotics. Other sources of probiotics include sauerkraut, miso, and tempeh.",
-            "Probiotics are live microorganisms that have health benefits when consumed. These beneficial bacteria provide all sorts of powerful benefits for your body and brain. They may:",
-            "Consuming probiotics in supplement form is one popular way to get them, but you can also get them from fermented foods.",
-            "Yogurt is one of the best sources of probiotics. It’s made from milk fermented by probiotics, mainly lactic acid bacteria and bifidobacteria.",
-            "Additionally, yogurt may be suitable for people with lactose intolerance. This is because the bacteria turn some of the lactose into lactic acid, which is also what gives yogurt its sour taste.",
-            "However, not all yogurt contains live probiotics, and processing can sometimes kill the live bacteria. For this reason, make sure to choose yogurt with active or live cultures.",
-            "Also, be on the lookout for high amounts of added sugar, even if the product is labeled “low fat” or “fat-free.”",
-            "Probiotic yogurt is associated with a number of health benefits and may be suitable for people with lactose intolerance. Make sure to choose yogurt that has active or live cultures.",
-            "Kefir is a fermented probiotic milk drink. It’s made by adding kefir grains to cow’s or goat’s milk.",
-            "Kefir grains are not cereal grains but rather cultures of lactic acid bacteria and yeast that look a bit like cauliflower."
-        ]
-    },
-    {
         "source_url": "https://www.healthline.com/nutrition/8-health-benefits-of-probiotics",
         "source_type": "blog",
         "title": "5 Health Benefits of Probiotics",
@@ -84,6 +109,35 @@
             "Probiotics may help improve how well your body fights off infections and may help reduce inflammation by regulating your immune response.",
             "Up to 80% of your immune cells are found in your gut, and the balance of your gut microbiome plays an important role in both local intestinal immunity and systemic immunity.",
             "Beneficial gut microbes help train your immune system to tell the difference between harmful and harmless pathogens and strengthen your intestinal barrier and limit the growth of harmful pathogens in your gut through exclusion (called colonization resistance) and by promoting production of antimicrobial substances."
+        ]
+    },
+    {
+        "source_url": "https://www.healthline.com/nutrition/11-super-healthy-probiotic-foods",
+        "source_type": "blog",
+        "title": "11 Probiotic Foods That Are Super Healthy",
+        "author": "Hrefna Palsdottir, MS",
+        "published_date": "2018-08-28T07:00:00Z",
+        "language": "en",
+        "region": "unknown",
+        "topic_tags": [
+            "probiotics",
+            "fermented",
+            "health",
+            "bacteria",
+            "benefits"
+        ],
+        "trust_score": 0.6,
+        "content_chunks": [
+            "Adding probiotics to your diet may offer many health benefits. Yogurt is one of the best sources of probiotics. Other sources of probiotics include sauerkraut, miso, and tempeh.",
+            "Probiotics are live microorganisms that have health benefits when consumed. These beneficial bacteria provide all sorts of powerful benefits for your body and brain. They may:",
+            "Consuming probiotics in supplement form is one popular way to get them, but you can also get them from fermented foods.",
+            "Yogurt is one of the best sources of probiotics. It’s made from milk fermented by probiotics, mainly lactic acid bacteria and bifidobacteria.",
+            "Additionally, yogurt may be suitable for people with lactose intolerance. This is because the bacteria turn some of the lactose into lactic acid, which is also what gives yogurt its sour taste.",
+            "However, not all yogurt contains live probiotics, and processing can sometimes kill the live bacteria. For this reason, make sure to choose yogurt with active or live cultures.",
+            "Also, be on the lookout for high amounts of added sugar, even if the product is labeled “low fat” or “fat-free.”",
+            "Probiotic yogurt is associated with a number of health benefits and may be suitable for people with lactose intolerance. Make sure to choose yogurt that has active or live cultures.",
+            "Kefir is a fermented probiotic milk drink. It’s made by adding kefir grains to cow’s or goat’s milk.",
+            "Kefir grains are not cereal grains but rather cultures of lactic acid bacteria and yeast that look a bit like cauliflower."
         ]
     },
     {
@@ -162,60 +216,6 @@
             "needed to survive as well as aiding in",
             "digestion the gut microbiome is thought",
             "to play an important role in protecting"
-        ]
-    },
-    {
-        "source_url": "https://pubmed.ncbi.nlm.nih.gov/33136284/",
-        "source_type": "pubmed",
-        "title": "Human gut microbiota/microbiome in health and diseases: a review.",
-        "author": "Eman Zakaria Gomaa",
-        "journal": "Antonie van Leeuwenhoek",
-        "published_date": "2020",
-        "language": "en",
-        "region": "global",
-        "topic_tags": [
-            "microbiota",
-            "human",
-            "modification",
-            "composition",
-            "nutritional"
-        ],
-        "trust_score": 0.85,
-        "content_chunks": [
-            "The human gut microbiota has received considerable interest in the recent years and our knowledge of the inhabitant species and their potential applications is increased particularly after the development of metagenomic studies",
-            "Gut microbiota is highly diverse and harboring trillions of microorganisms in human digestive system",
-            "The shaping and multiplication of gut microbiome starts at birth, while the modification of their composition depends mainly on various genetic, nutritional and environmental factors",
-            "The modification in the composition and function of the gut microbiota can change intestinal permeability, digestion and metabolism as well as immune responses",
-            "The pro inflammatory state caused by alternation of gut microbiota balance lead to the onset of many diseases ranging from gastrointestinal and metabolic conditions to immunological and neuropsychiatric diseases",
-            "In this context, the present review clarifies the role of gut microbiota in maintaining host health and investigates how nutritional and environmental factors affect the gut microbial structure and function",
-            "In addition, many therapeutic strategies of gut microbiota aimed at modulating and restoring of the intestinal ecosystem balance have been surveyed."
-        ]
-    },
-    {
-        "source_url": "https://pubmed.ncbi.nlm.nih.gov/35105664/",
-        "source_type": "pubmed",
-        "title": "Gut microbiome and health: mechanistic insights.",
-        "author": "Willem M de Vos, Herbert Tilg, Matthias Van Hul",
-        "journal": "Gut",
-        "published_date": "2022",
-        "language": "en",
-        "region": "global",
-        "topic_tags": [
-            "molecular",
-            "diseases",
-            "receptor",
-            "microbiota",
-            "health"
-        ],
-        "trust_score": 0.85,
-        "content_chunks": [
-            "The gut microbiota is now considered as one of the key elements contributing to the regulation of host health",
-            "Virtually all our body sites are colonised by microbes suggesting different types of crosstalk with our organs",
-            "Because of the development of molecular tools and techniques (ie, metagenomic, metabolomic, lipidomic, metatranscriptomic), the complex interactions occurring between the host and the different microorganisms are progressively being deciphered",
-            "Nowadays, gut microbiota deviations are linked with many diseases including obesity, type 2 diabetes, hepatic steatosis, intestinal bowel diseases (IBDs) and several types of cancer",
-            "Thus, suggesting that various pathways involved in immunity, energy, lipid and glucose metabolism are affected.In this review, specific attention is given to provide a critical evaluation of the current understanding in this field",
-            "Numerous molecular mechanisms explaining how gut bacteria might be causally linked with the protection or the onset of diseases are discussed",
-            "We examine well-established metabolites (ie, short-chain fatty acids, bile acids, trimethylamine N-oxide) and extend this to more recently identified molecular actors (ie, endocannabinoids, bioactive lipids, phenolic-derived compounds, advanced glycation end products and enterosynes) and their specific receptors such as peroxisome proliferator-activated receptor alpha (PPARα) and gamma (PPARγ), aryl hydrocarbon receptor (AhR), and G protein-coupled receptors (ie, GPR41, GPR43, GPR119, Takeda G protein-coupled receptor 5).Altogether, understanding the complexity and the molecular aspects linking gut microbes to health will help to set the basis for novel therapies that are already being developed."
         ]
     }
 ]
