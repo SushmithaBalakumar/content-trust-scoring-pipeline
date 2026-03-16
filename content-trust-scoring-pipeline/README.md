@@ -289,9 +289,9 @@ The pipeline will:
 The project also includes a simple query system that allows users to retrieve trusted information from the dataset.
 
 Example:
-'''
+```
 python src/query.py microbiome
-'''
+```
 
 The system searches the dataset and returns the most relevant sources ranked by trust_score.
 This demonstrates how the dataset could be used in Retrieval-Augmented Generation (RAG) pipelines where AI systems prioritize high-credibility information.
