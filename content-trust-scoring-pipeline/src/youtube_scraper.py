@@ -1,3 +1,5 @@
+import requests
+from bs4 import BeautifulSoup
 from youtube_transcript_api import YouTubeTranscriptApi
 from scoring import calculate_trust_score
 from tagging import extract_topics
@@ -5,26 +7,49 @@ from tagging import extract_topics
 
 def scrape_youtube(video_id):
 
+    url = f"https://www.youtube.com/watch?v={video_id}"
+
+    # ---------- Extract page metadata ----------
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    # Title
+    title_tag = soup.find("meta", property="og:title")
+    title = title_tag["content"] if title_tag else "Unknown"
+
+    # Channel name (author)
+    author_tag = soup.find("link", itemprop="name")
+    author = author_tag["content"] if author_tag else "Unknown"
+
+    # Description
+    description_tag = soup.find("meta", {"name": "description"})
+    description = description_tag["content"] if description_tag else ""
+
+    published_date = "Unknown"  # YouTube page does not easily expose it without API
+
+    # ---------- Transcript extraction ----------
     try:
         transcript = YouTubeTranscriptApi().fetch(video_id)
-        content_chunks = [t.text for t in transcript]
-        full_text = " ".join(content_chunks)
+        content_chunks = [t.text.strip() for t in transcript if t.text.strip()]
 
     except Exception:
         content_chunks = ["Transcript not available"]
-        full_text = ""
 
-    # Topic extraction
+    # Combine text for tagging
+    full_text = description + " " + " ".join(content_chunks)
+
+    # ---------- Topic extraction ----------
     topics = extract_topics(full_text)
 
-    # Trust scoring
-    trust_score = calculate_trust_score("youtube", "Unknown", content_chunks)
+    # ---------- Trust score ----------
+    trust_score = calculate_trust_score("youtube", author, content_chunks)
 
     return {
-        "source_url": f"https://www.youtube.com/watch?v={video_id}",
+        "source_url": url,
         "source_type": "youtube",
-        "author": "Unknown",
-        "published_date": "Unknown",
+        "title": title,
+        "author": author,
+        "published_date": published_date,
         "language": "en",
         "region": "global",
         "topic_tags": topics,
